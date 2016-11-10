@@ -25,8 +25,8 @@ const buildStringFromArrayOfStrings = stringArray => stringArray.reduce((a, b) =
 
 const printString = string => process.stdout.write(string + '\n')
 
-// accepts an array of words and prints out the original set of words followed by the words 
-// translated into pig latin
+// accepts an array of words and prints out the original set of words followed by the words translated into pig latin
+// designed to serve as a single function to run the entire program allowing all helper functions to work largely independently of each other
 
 const runPigLatinTranslator = wordArray => {
 	const pigLatinWordArray = buildArrayOfPigLatinWord(wordArray) // builds the pig latin words array
