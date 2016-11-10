@@ -21,13 +21,13 @@ const handleUserInput = (userInput) => {
 	}
 }
 
-// A function that accepts a string as an argument and returns it as an integer
+// accepts a string as an argument and returns it as an integer
 
 const parseStringToNumber = (string) => {
 	return parseInt(string, 10)
 }
 
-// A function that gets the current Date using the Javascript new Date() method
+// gets the current Date using the Javascript new Date() method
 // and returns the current year using the getFullYear method
 
 const getCurrentYear = () => {
@@ -35,14 +35,14 @@ const getCurrentYear = () => {
 	return currentDate.getFullYear()
 }
 
-// A function that accepts a year as an argument, returns true if it is a leap year
+// accepts a year as an argument, returns true if it is a leap year
 // or returns false if it is not a leap year
 
 const isLeapYear = (year) => {
 	return ((year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0))
 }
 
-// A function that accepts a year and returns the closest future leap year
+// accepts a year and returns the closest future leap year
 
 const determineClosestFutureLeapYear = (year) => {
 	if(!isLeapYear(year)) {
@@ -52,7 +52,7 @@ const determineClosestFutureLeapYear = (year) => {
 	}
 }
 
-// A function that accepts a leap year an argument and returns the upcoming leap year
+// accepts a leap year an argument and returns the upcoming leap year
 
 const determineNextLeapYearGivenCurrentLeapYear = (leapYear) => {
 	const potentialNextLeapYear = leapYear + 4 // Declares the potential next leap year by incrementing the passed year by four
@@ -63,18 +63,19 @@ const determineNextLeapYearGivenCurrentLeapYear = (leapYear) => {
 	}
 }
 
-// A function that accepts a leap year and a leap year array, pushes the leap year into the leap year array,
+// accepts a leap year and a leap year array, pushes the leap year into the leap year array,
 // and returns the leap year array
+// destructures arguments from object passed in so they can be passed in any order
 
-const pushLeapYearToLeapYearArray = (leapYear, leapYearArray) => {
-	leapYearArray.push(leapYear)
+const pushLeapYearToLeapYearArray = ({currentLeapYear, leapYearArray}) => {
+	leapYearArray.push(currentLeapYear)
 	return leapYearArray
 }
 
-// A function that accpets a leap year and a leap year array and builds a leap year array with a lenght of 20
+// accpets a leap year and a leap year array and builds a leap year array with a lenght of 20
 
 const buildLeapYearArray = (currentLeapYear, leapYearArray = []) => {
-	if(pushLeapYearToLeapYearArray(currentLeapYear, leapYearArray).length !== 20) { // Checks if the array returned from calling the pushToLeapYearArray function has a length 																																										 of 20
+	if(pushLeapYearToLeapYearArray({currentLeapYear, leapYearArray}).length !== 20) { // Checks if the array returned from calling the pushToLeapYearArray function has a length of 20
 		const nextLeapYear = determineNextLeapYearGivenCurrentLeapYear(currentLeapYear) // Defines the next leap year using the determineNextLeapYearGivenCurrentLeapYear function
 		return buildLeapYearArray(nextLeapYear, leapYearArray) // Calls itself recursively until the leap year array has a length of 20
 	} else {
@@ -82,7 +83,7 @@ const buildLeapYearArray = (currentLeapYear, leapYearArray = []) => {
 	}
 }
 
-// A function that accepts an array of integers as an argument and returns an array of strings
+// accepts an array of integers as an argument and returns an array of strings
 
 const convertArrayOfIntegersToArrayOfStrings = (arrayOfIntegers) => {
 	return arrayOfIntegers.map((integer) => {
@@ -90,7 +91,7 @@ const convertArrayOfIntegersToArrayOfStrings = (arrayOfIntegers) => {
 	})
 }
 
-// A function that builds a single string from an array of strings
+// builds a single string from an array of strings
 
 const buildStringFromArrayOfStrings = (stringArray) => {
 	return stringArray.reduce((a, b) => {
@@ -98,21 +99,21 @@ const buildStringFromArrayOfStrings = (stringArray) => {
 	})
 }
 
-// A function that prints a string with an ending new line character
+// prints a string with an ending new line character
 
 const printString = (string) => {
 	process.stdout.write(string + '\n')
 }
 
-// A function accepts a user input and runs a program that prints out the next twenty leap years
+// accepts a user input and runs a program that prints out the next twenty leap years
 // based on the the user's input
 
 const runLeapYearProgram = (userInput) => {
 	const upcomingYear = handleUserInput(userInput) // Determines the upcoming year, based on the user's input
 	const firstLeapYear = determineClosestFutureLeapYear(upcomingYear) // Determines the first leap year in the leap year array based on the upcoming year
-	const leapYearIntegerArray = buildLeapYearArray(firstLeapYear) // Creates an array of leap years as integers using the buildLeapYearArray function with the first leap year 																																	of the array as its initial argument
+	const leapYearIntegerArray = buildLeapYearArray(firstLeapYear) // Creates an array of leap years as integers using the buildLeapYearArray function with the first leap year of the array as its initial argument
 	const leapYearStringArray = convertArrayOfIntegersToArrayOfStrings(leapYearIntegerArray) // Converts the array of leap year integers to an array of leap year strings
- 	const leapYearString = buildStringFromArrayOfStrings(leapYearStringArray) // Converts an array of leap year strings into a single string, with leap years seperated by a 																																								 newline character
+ 	const leapYearString = buildStringFromArrayOfStrings(leapYearStringArray) // Converts an array of leap year strings into a single string, with leap years seperated by a newline character
 	printString(leapYearString) // Prints the leap year string
 }
 
