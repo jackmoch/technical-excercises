@@ -42,7 +42,8 @@ const pushLeapYearToLeapYearArray = ({currentLeapYear, leapYearArray}) => {
 }
 
 const buildLeapYearArray = (currentLeapYear, leapYearArray = []) => {
-	if(pushLeapYearToLeapYearArray({currentLeapYear, leapYearArray}).length !== 20) { 
+	leapYearArray.push(currentLeapYear)
+	if(leapYearArray.length !== 20) { 
 		const nextLeapYear = determineNextLeapYearGivenCurrentLeapYear(currentLeapYear)
 		return buildLeapYearArray(nextLeapYear, leapYearArray) 
 	} else {
