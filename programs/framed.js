@@ -23,7 +23,8 @@ const buildStringOfAsterisks = longestWordLength => Array(longestWordLength + 5)
 // Each "word row" will be comprised of the same number of characters, with spaces accounting for differences in word length
 // destructures arguments from object passed in so they can be passed in any order
 
-const buildWordRowsArray = ({wordArray, longestWordLength}) => wordArray.map(word => '* ' + word + Array(longestWordLength - word.length + 1).join(' ') + ' *' + '\n')
+const buildWordRowsArray = ({wordArray, longestWordLength}) => 
+	wordArray.map(word => '* ' + word + Array(longestWordLength - word.length + 1).join(' ') + ' *' + '\n')
 
 // builds a single string from an array of strings
 
@@ -43,6 +44,9 @@ const buildFramedWordArray = ({horiziontalDivider, wordRowsString}) => {
 // prints a string with an ending new line character
 
 const printString = string => process.stdout.write(string + '\n')
+
+// a single function that accepts an array of words and prints that array inside a frame of asterisks
+// designed to serve as a single function to run the entire program allowing all helper functions to work largely independently of each other
 
 const runFramedProgram = wordArray => {
 	const wordLengthArray = buildArrayOfWordLengths(wordArray) // Builds an array used to determine the length of the longest word
