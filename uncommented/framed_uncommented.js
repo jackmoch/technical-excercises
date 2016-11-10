@@ -4,7 +4,8 @@ const [, , ...args] = process.argv;
 const buildArrayOfWordLengths = wordArray => wordArray.map(word => word.length)
 const determineLargestNumberInArray = wordLengthArray => Math.max(...wordLengthArray)
 const buildStringOfAsterisks = longestWordLength => Array(longestWordLength + 5).join('*')
-const buildWordRowsArray = ({wordArray, longestWordLength}) => wordArray.map(word => '* ' + word + Array(longestWordLength - word.length + 1).join(' ') + ' *' + '\n')
+const buildWordRowsArray = ({wordArray, longestWordLength}) => 
+	wordArray.map(word => '* ' + word + Array(longestWordLength - word.length + 1).join(' ') + ' *' + '\n')
 const buildStringFromArrayOfStrings = stringArray => stringArray.reduce((a, b) => a + b)
 const printString = string => process.stdout.write(string + '\n')
 
