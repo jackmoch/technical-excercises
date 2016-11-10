@@ -52,18 +52,11 @@ const determineNextLeapYearGivenCurrentLeapYear = leapYear => {
 	}
 }
 
-// accepts a leap year and a leap year array, pushes the leap year into the leap year array, and returns the leap year array
-// destructures arguments from object passed in so they can be passed in any order
-
-const pushLeapYearToLeapYearArray = ({currentLeapYear, leapYearArray}) => {
-	leapYearArray.push(currentLeapYear)
-	return leapYearArray
-}
-
 // accpets a leap year and a leap year array and builds a leap year array with a lenght of 20
 
 const buildLeapYearArray = (currentLeapYear, leapYearArray = []) => {
-	if(pushLeapYearToLeapYearArray({currentLeapYear, leapYearArray}).length !== 20) { // Checks if the array returned from calling the pushToLeapYearArray function has a length of 20
+	leapYearArray.push(currentLeapYear) // pushes the current leap year into the leap year array
+	if(leapYearArray.length !== 20) { // Checks leapYearArray has a length of 20
 		const nextLeapYear = determineNextLeapYearGivenCurrentLeapYear(currentLeapYear) // Defines the next leap year using the determineNextLeapYearGivenCurrentLeapYear function
 		return buildLeapYearArray(nextLeapYear, leapYearArray) // Calls itself recursively until the leap year array has a length of 20
 	} else {
@@ -84,6 +77,7 @@ const buildStringFromArrayOfStrings = stringArray => stringArray.reduce((a, b) =
 const printString = string => process.stdout.write(string + '\n')
 
 // accepts a user input and runs a program that prints out the next twenty leap years based on the the user's input
+// designed to serve as a single function to run the entire program allowing all helper functions to work largely independently of each other
 
 const runLeapYearProgram = userInput => {
 	const upcomingYear = handleUserInput(userInput) // Determines the upcoming year, based on the user's input
